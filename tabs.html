@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabbed Section</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: #f1f2f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .tab-container {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .tab-header {
+    display: flex;
+    background: #dfe6e9;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: transparent;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .tab-btn:hover {
+    background: #b2bec3;
+  }
+
+  .tab-btn.active {
+    background: #0984e3;
+    color: white;
+  }
+
+  .tab-content {
+    padding: 25px;
+    display: none;
+    animation: fade 0.5s ease-in-out;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .tab-btn {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="tab-container">
+  <div class="tab-header">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="info">Info</button>
+    <button class="tab-btn" data-tab="contact">Contact</button>
+  </div>
+
+  <div class="tab-content active" id="overview">
+    <h2>Overview</h2>
+    <p>This is the overview section. It gives a brief description of the product or topic. You can include a short summary, image, or stats here.</p>
+  </div>
+
+  <div class="tab-content" id="info">
+    <h2>Information</h2>
+    <p>This tab provides detailed information, features, or technical specifications. You can add lists, bullet points, or data tables here.</p>
+  </div>
+
+  <div class="tab-content" id="contact">
+    <h2>Contact</h2>
+    <p>If you’d like to get in touch, please email us at <a href="mailto:info@example.com">info@example.com</a> or use the contact form on our website.</p>
+  </div>
+</div>
+
+<script>
+const tabButtons = document.querySelectorAll(".tab-btn");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Remove active states
+    tabButtons.forEach(b => b.classList.remove("active"));
+    tabContents.forEach(c => c.classList.remove("active"));
+
+    // Add active class to clicked tab
+    btn.classList.add("active");
+    const target = btn.getAttribute("data-tab");
+    document.getElementById(target).classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>
